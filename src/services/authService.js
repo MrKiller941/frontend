@@ -8,12 +8,12 @@ class AuthService {
             body: JSON.stringify([login, password]),
         });
         if(res.ok){
-            res.json().then((token) => {
+            await res.json().then((token) => {
                 AuthService.save(login, token);
             })
             return;
         } else {
-            Promise.reject();
+            return Promise.reject();
         }
     }
 
@@ -29,7 +29,7 @@ class AuthService {
             })
             return;
         } else {
-            Promise.reject();
+            return Promise.reject();
         }
     }
 

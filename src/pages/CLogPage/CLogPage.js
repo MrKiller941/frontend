@@ -26,9 +26,8 @@ class CLogPage extends React.Component {
                 login: this.state.login,
                 password: this.state.password
             })
-
             this.props.history.push("/catalog")
-        });
+        })
     }
 
 
