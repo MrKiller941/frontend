@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { authRoutes, publicRoutes } from "./configs/routes";
-// import { useUserInfo } from "../mobx/user/hooks";
 import { useAuthUser, useUserInfo } from "../redux/hooks";
 import AuthService from "../model/services/authService";
 

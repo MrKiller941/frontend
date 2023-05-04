@@ -3,7 +3,7 @@ import CBasketPanel from '../../components/Elements/CBasketPanel/CBasketPanel';
 import CCatElement from '../../components/Elements/CCatElement/CCatElement';
 import CButton from "../../components/UI/CButton/CButton";
 import CatalogService from '../../../model/services/catalogService';
-import Chat from "../../components/func/Chat";
+import Chat from "../../components/function/Chat";
 import { useNavigate } from 'react-router-dom';
 import "./CCatalogPage.css"
 import { useAuthUser } from '../../../redux/hooks';
@@ -52,13 +52,13 @@ function CCatalogPage(props) {
 
             <div className="catalog">
                 {state.products.map((product, index) => {
-                    console.log(product);
                     return <CCatElement product={product} key={index} onClick={() => addToCart(product)} />
                 })}
             </div>
 
-            <div>
+            <div className="exit">
                 <CButton onClick={useAuth.signOut}>Выйти</CButton>
+                
             </div>
 
             <div style={{ float: "right" }}>

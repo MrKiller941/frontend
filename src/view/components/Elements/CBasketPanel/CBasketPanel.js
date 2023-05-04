@@ -9,8 +9,7 @@ class CBasketPanel extends React.Component {
                 <br />
                 <br />
                 <br />
-                <CLabel>Корзина</CLabel>
-                <img src="/images/basket.png" id="userImg" width="80" height="60" className="basketImage"></img>
+                <img src="/images/add-product.png" id="userImg" width="60" height="60" className="basketImage"></img>
                 <div className="dropdownContent">
                     <div className="dropdownContentLineMessage">
                         {this.props.products.map((product, idx) => {

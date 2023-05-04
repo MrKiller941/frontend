@@ -1,7 +1,20 @@
 .textbar {
-    border-radius: 3px;
-    background-color: rgba(0, 0, 0, 0.1);
-    border: none;
-    border-bottom: 2px solid #585858;
-    outline: none;
-}
+        display: flex;
+        align-items: center;
+        width: auto;
+        background-color: #ffffff;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        border-radius: 5px;
+        overflow: hidden;
+        margin-top: 1rem;
+        box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+        transition-duration: .1s;
+        font-size: 14px;
+        font-weight: 500;
+        flex-shrink: 0;
+        border-style: none;
+        color: rgb(10, 10, 10) !important;
+        touch-action: manipulation;
+        border-width: 2px;
+        border-color: rgb(33, 16, 78);
+    }
