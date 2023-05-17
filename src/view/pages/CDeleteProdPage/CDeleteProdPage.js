@@ -39,15 +39,15 @@ function CDeleteProdPage() {
 
     return (
         <ul className="panel">
-            <li className="nm">Название:<br /><CTextBar value={state.name} onChange={(e) => setState({ ...state, name: e.currentTarget.value })} /></li>
+            <li className="nm" style={{color: 'white'}}>Название:<br /><CTextBar value={state.name} onChange={(e) => setState({ ...state, name: e.currentTarget.value })} /></li>
             <br />
 
-            <li className="bt"><CButton onClick={deleteProduct}>Удалить</CButton></li>
+            <li className="bt" style={{color: 'white'}}><CButton onClick={deleteProduct}>Удалить</CButton></li>
             <br />
 
-            <li className="btBack"><CButton onClick={back}>Назад</CButton></li>
+            <li className="btBack" style={{color: 'white'}}><CButton onClick={back}>Назад</CButton></li>
 
-            <div className="message">{state.message && <><br /> {state.message}</>}</div>
+            <div className="message" style={{color: 'white'}}>{state.message && <><br /> {state.message}</>}</div>
         </ul>
     )
 }

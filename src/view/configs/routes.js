@@ -27,5 +27,5 @@ export const publicRoutes = [
     {
         path: "/register",
         component: <CRegPage />
-    },
+    }
 ]

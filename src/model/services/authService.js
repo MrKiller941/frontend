@@ -2,10 +2,10 @@ import config from '../../view/configs/config.json'
 
 class AuthService {
     static async signIn(login, password) {
-        const response = await fetch(config.apiUrl + "/api/auth", {
+        const response = await fetch(config.apiUrl + "/api/user/auth", {
             method: "POST",
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify([login, password]),
+            body: JSON.stringify({login, password}),
         });
 
         if(response.ok){
@@ -20,10 +20,10 @@ class AuthService {
     }
 
     static async signUp(login, password) {
-        const response = await fetch(config.apiUrl + "/api/reg", {
+        const response = await fetch(config.apiUrl + "/api/user/reg", {
             method: "POST",
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify([login, password]),
+            body: JSON.stringify({login, password}),
         });
 
         console.log(response);

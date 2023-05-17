@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import ChatServiceFactory from "../../../model/services/ChatService";
-import classes from './Chat.module.css';
+import ChatServiceFactory from "../../../../model/services/ChatService";
+import classes from './CChat.module.css';
 
 const chatService = ChatServiceFactory.createInstance();
 
-function Chat() {
+function CChat() {
 
     const [messageValue, setMessageValue] = useState("");
     const [messages, setMessages] = useState([]);
@@ -40,26 +40,14 @@ function Chat() {
 
     return (
         <div className={classes.chat}>
-            <div style={{
-                width: "350px",
-                height: "300px",
-                overflowY: "scroll",
-                overflowX: "auto",
-            }}
+            <div className={classes.messages}
             ref= {chatRef}>
                 {messages.map((message, index) => {
 
                     return (
-                        <div key={index} style={{
-
-                            marginBottom: "10px",
-                        
-                        }}>
-                            <span style={{
-                                color: "#8b00ff",
-                                backgroundColor: "white",
-                                fontSize: "24px"
-                            }}>{`[ ${message.username} : ${message.time} ] ${message.text}`}</span>
+                        <div key={index} className={classes.message}>
+                            <span className={classes.message_content}>
+                            {`[ ${message.username} : ${message.time} ] ${message.text}`}</span>
                          </div>
                     )
                 })}
@@ -67,10 +55,10 @@ function Chat() {
                 ></div>
             
             </div>
-            <input placeholder="Введите сообщение" type="text" onChange={handleText} value={messageValue}></input>
-            <button onClick={send}>{"Отправить"}</button>
+            <input placeholder="Введите сообщение" type="text" onChange={handleText} value={messageValue} className={classes.input}></input>
+            <button onClick={send} className={classes.button}>{"Отправить"}</button>
         </div>
     )
 }
 
-export default Chat;
+export default CChat;

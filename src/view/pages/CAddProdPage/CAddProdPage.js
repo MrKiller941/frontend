@@ -46,21 +46,21 @@ function CAddProdPage() {
 
     return (
         <ul className="panel">
-            <li>Название: <br /><CTextBar value={state.name} onChange={e => setState({...state, name: e.currentTarget.value })} /></li>
+            <li style={{color: 'white'}}>Название: <br /><CTextBar value={state.name} onChange={e => setState({...state, name: e.currentTarget.value })} /></li>
             <br />
 
-            <li>Стоимость:<br /><CTextBar value={state.cost} onChange={e => setState({...state, cost: e.currentTarget.value })} /></li>
+            <li style={{color: 'white'}}>Стоимость:<br /><CTextBar value={state.cost} onChange={e => setState({...state, cost: e.currentTarget.value })} /></li>
             <br />
 
-            <li>Ссылка на изображение:<br /><CTextBar value={state.img} onChange={e => setState({...state, img: e.currentTarget.value })} /></li>
+            <li style={{color: 'white'}}>Ссылка на изображение:<br /><CTextBar value={state.img} onChange={e => setState({...state, img: e.currentTarget.value })} /></li>
             <br />
 
-            <li>Количество:<br /><CTextBar value={state.count} onChange={e => setState({...state, count: e.currentTarget.value })} /></li>
+            <li style={{color: 'white'}}>Количество:<br /><CTextBar value={state.count} onChange={e => setState({...state, count: e.currentTarget.value })} /></li>
             <br />
-            <li><CButton onClick={addProduct}>Добавить</CButton></li>
+            <li style={{color: 'white'}}><CButton onClick={addProduct}>Добавить</CButton></li>
             <br />
 
-            <li><CButton onClick={back}>Назад</CButton></li>
+            <li style={{color: 'white'}}><CButton onClick={back}>Назад</CButton></li>
             <div>{state.message && <><br />{state.message}</>}</div>
         </ul >
     )

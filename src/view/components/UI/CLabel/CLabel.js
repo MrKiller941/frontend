@@ -1,10 +1,10 @@
 import React from 'react'
-import './CLabel.css'
+import styles from './CLabel.module.css';
 
 class CLabel extends React.Component {
     render() {
         return (
-            <div>
+            <div className={styles.label}>
                 {this.props.children}
             </div>
         )

@@ -32,8 +32,8 @@ function Routing() {
   }, []);
 
   if (loading) {
-    return <div>
-      Loading...
+    return <div style={{ color: "white" }}>
+      Происходит загрузка данных:)
     </div>
   }
 

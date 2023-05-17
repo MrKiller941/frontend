@@ -47,7 +47,7 @@ function CRegPage() {
             <CButton onClick={register}>Зарегистрироваться</CButton>
             <br />
             <CButton onClick={toAuth}>Назад</CButton>
-            {state.message && <><br />{state.message}</>}
+            {state.message && <><br /><div style={{ color: "white" }}>{state.message}</div></>}
         </div>
     )
 }

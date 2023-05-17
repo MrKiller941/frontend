@@ -3,10 +3,10 @@ import CBasketPanel from '../../components/Elements/CBasketPanel/CBasketPanel';
 import CCatElement from '../../components/Elements/CCatElement/CCatElement';
 import CButton from "../../components/UI/CButton/CButton";
 import CatalogService from '../../../model/services/catalogService';
-import Chat from "../../components/function/Chat";
+import Chat from '../../components/Elements/CChat/CChat';
 import { useNavigate } from 'react-router-dom';
-import "./CCatalogPage.css"
 import { useAuthUser } from '../../../redux/hooks';
+import styles from './CCatalogPage.module.css';
 
 function CCatalogPage(props) {
     const initialState = {
@@ -44,27 +44,33 @@ function CCatalogPage(props) {
     }
 
     return (
-        <>
-            <CBasketPanel products={state.cartProducts} />
-            <CButton onClick={addProduct}>Добавить продукт</CButton>
-            <br />
-            <CButton onClick={deleteProduct}>Удалить продукт</CButton>
-
-            <div className="catalog">
+        <div className={styles.page}>  
+            <header className={styles.header}>
+                <div className={styles.header_element}>
+                    <CBasketPanel products={state.cartProducts} />
+                </div>
+                <div className={styles.header_element}>
+                    <CButton onClick={addProduct}>Добавить продукт</CButton>
+                </div>
+                <div className={styles.header_element}>
+                    <CButton onClick={deleteProduct}>Удалить продукт</CButton>
+                </div>
+                <div className={styles.header_element}>
+                    <CButton onClick={useAuth.signOut}>Выйти</CButton>
+                </div>
+            </header>
+            
+            <div className={styles.catalog}>
+                <div className={styles.chat}>
+                    <Chat/>
+                </div>
                 {state.products.map((product, index) => {
                     return <CCatElement product={product} key={index} onClick={() => addToCart(product)} />
                 })}
             </div>
 
-            <div className="exit">
-                <CButton onClick={useAuth.signOut}>Выйти</CButton>
-                
-            </div>
-
-            <div style={{ float: "right" }}>
-                <Chat/>
-            </div>
-        </>
+            
+        </div>
     )
 }
 

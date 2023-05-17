@@ -42,7 +42,7 @@ function CLogPage() {
             <CButton onClick={auth}>Войти</CButton>
             <br />
             <CButton onClick={toRegistration}>Регистрация</CButton>
-            {message && <><br />{message}</>}
+            {message && <><br /><span style={{ color: "white" }}>{message}</span></>}
         </div>
     )
 }
