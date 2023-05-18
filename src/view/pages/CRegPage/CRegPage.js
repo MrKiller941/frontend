@@ -1,53 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CRegPanel from '../../components/Elements/CRegPanel/CRegPanel';
 import CButton from "../../components/UI/CButton/CButton";
-import AuthService from '../../../model/services/authService';
 import { useNavigate } from 'react-router-dom';
+import { useListenerIsAuth, useListenerIsRegistrationStatus, useRegistration } from '../../../redux/api';
 
 function CRegPage() {
     const initialState = {
         password: "",
         login: "",
-        message: ""
     }
     const [state, setState] = useState(initialState);
     const navigate = useNavigate();
 
-    const toAuth = () => {
-        navigate("/");
-    }
+    const registerA = useRegistration();
+    const registrationStatus = useListenerIsRegistrationStatus();
+    const isAuth = useListenerIsAuth();
 
-    const register = async () => {
-        const isOk = await AuthService.signUp(
-            state.login,
-            state.password
-        )
-        if (isOk) {
-            toAuth()
+    useEffect(() => {
+        if(isAuth){
+            navigate('/catalog');
         }
-
-        setState({
-            ...state,
-            message: "Регистрация успешна."
-        })
-    }
-
-    const onRegPanelChange = ({ password, login }) => {
-        setState({
-            ...state,
-            password: password,
-            login: login,
-        })
-    }
+    }, [isAuth])
 
     return (
         <div align="center" className="rpage">
-            <CRegPanel onChange={onRegPanelChange} />
-
-            <CButton onClick={register}>Зарегистрироваться</CButton>
+            <CRegPanel onChange={({ password, login }) => {
+                setState({
+                    ...state,
+                    password: password,
+                    login: login,
+                })
+            }} />
+            <CButton onClick={() => registerA(state.login, state.password)}>Зарегистрироваться</CButton>
             <br />
-            <CButton onClick={toAuth}>Назад</CButton>
-            {state.message && <><br /><div style={{ color: "white" }}>{state.message}</div></>}
+            <CButton onClick={() => navigate('/')}>Назад</CButton>
+            {registrationStatus == false && <><br /><div style={{ color: "white" }}>{"Ошибка регистрации"}</div></>}
         </div>
     )
 }

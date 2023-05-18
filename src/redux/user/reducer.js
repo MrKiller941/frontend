@@ -1,28 +1,28 @@
-import { LOGOUT, LOGIN } from "./constants.js"
+import * as actions from './actions';
 
 const initialState = {
-    isAuth: false,
-    login: "",
-    password: ""
+    isAuth: localStorage.getItem('token') != null ? true : false
 }
 
-function userReducer(state = initialState, action) {
-    switch (action.type) {
-        case LOGIN:
+export default function reducerUser(state = initialState, action){
+     switch (action.type) {
+        case actions.LOGIN_USER:
             return {
-                isAuth: action.payload?.isAuth || state.isAuth,
-                login: action.payload?.login || state.login,
-                password: action.payload?.password || state.password
+                ...state,
+                isLoginStatus: action.payload,
+                isAuth: action.payload
             }
-        case LOGOUT:
+        case actions.REGISTRATION_USER:
             return {
-                isAuth: false,
-                login: "",
-                password: ""
+                ...state,
+                isRegistrationStatus: action.payload,
+                isAuth: action.payload
+            }
+        case actions.LOGOUT_USER:
+            return {
+                isAuth: false
             }
         default:
-            return state
+            return state;
     }
 }
-
-export default userReducer;

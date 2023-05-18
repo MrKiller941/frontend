@@ -5,8 +5,8 @@ import CButton from "../../components/UI/CButton/CButton";
 import CatalogService from '../../../model/services/catalogService';
 import Chat from '../../components/Elements/CChat/CChat';
 import { useNavigate } from 'react-router-dom';
-import { useAuthUser } from '../../../redux/hooks';
 import styles from './CCatalogPage.module.css';
+import { useListenerIsAuth, useLogout } from '../../../redux/api';
 
 function CCatalogPage(props) {
     const initialState = {
@@ -15,7 +15,15 @@ function CCatalogPage(props) {
     }
     const [state, setState] = useState(initialState);
     const navigate = useNavigate();
-    const useAuth = useAuthUser();
+
+    const isAuth = useListenerIsAuth();
+    const logoutA = useLogout();
+
+    useEffect(() => {
+        if(!isAuth){
+            navigate('/');
+        }
+    }, [isAuth])
 
     useEffect(() => {
         const getData = async () => {
@@ -56,7 +64,7 @@ function CCatalogPage(props) {
                     <CButton onClick={deleteProduct}>Удалить продукт</CButton>
                 </div>
                 <div className={styles.header_element}>
-                    <CButton onClick={useAuth.signOut}>Выйти</CButton>
+                    <CButton onClick={logoutA}>Выйти</CButton>
                 </div>
             </header>
             

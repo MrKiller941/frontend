@@ -1,16 +1,7 @@
-import { createStore, combineReducers } from 'redux'
-import userReducer from './user/reducer.js'
-import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import rootReducer from "./rootReducer";
+import {composeWithDevTools} from 'redux-devtools-extension'
 
-const store = createStore(combineReducers({
-    "user": userReducer
-}))
-
-export function buildProvider(){
-    return (props) => 
-        <Provider store={store}>
-            {props.children}
-        </Provider>
-}
-
-export default store
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+export default store;

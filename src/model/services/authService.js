@@ -60,6 +60,11 @@ class AuthService {
     static getToken(){
         return localStorage.getItem('token');
     }
+
+    static logout(){
+        localStorage.removeItem('login');
+        localStorage.removeItem('token');
+    }
 }
 
 export default AuthService

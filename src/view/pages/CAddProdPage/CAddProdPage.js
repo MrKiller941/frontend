@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CTextBar from '../../components/UI/CTextBar/CTextBar'
 import CButton from '../../components/UI/CButton/CButton'
 import CatalogService from '../../../model/services/catalogService';
 import { useNavigate } from 'react-router-dom';
 import "./CAddProdPage.css"
+import { useListenerIsAuth } from '../../../redux/api';
 
 function CAddProdPage() {
     const initialState = {
@@ -15,6 +16,14 @@ function CAddProdPage() {
     }
     const [state, setState] = useState(initialState);
     const navigate = useNavigate();
+
+    const isAuth = useListenerIsAuth();
+
+    useEffect(() => {
+        if(!isAuth){
+            navigate('/');
+        }
+    }, [isAuth])
 
     const addProduct = async () => {
         const isOk = await CatalogService.postProduct({

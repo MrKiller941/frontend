@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import CLogPanel from "../../components/Elements/CLogPanel/CLogPanel";
 import CButton from "../../components/UI/CButton/CButton";
-import AuthService from '../../../model/services/authService';
-import { useAuthUser } from "../../../redux/hooks";
+import { useListenerIsAuth, useListenerIsLoginStatus, useLogin } from '../../../redux/api';
 
 
 function CLogPage() {
@@ -11,38 +10,28 @@ function CLogPage() {
 
     const [password, setPassword] = useState("");
     const [login, setLogin] = useState("");
-    const [message, setMessage] = useState("");
-    const {
-        signIn
-    } = useAuthUser();
 
-    async function auth() {
-        await AuthService.signIn(login, password)
-            .then(() => {
-                console.log("ok");
-                signIn(true, login, password);
-                navigate("/catalog");
-            })
-            .catch(() => {
-                setMessage("Неправильный логин или пароль")
-                console.log("error");
-            })
-    }
+    const loginA = useLogin();
+    const isAuth = useListenerIsAuth();
+    const loginStatus = useListenerIsLoginStatus();
 
-    const toRegistration = () => navigate("/register")
+    useEffect(() => {
+        if(isAuth){
+            navigate('/catalog');
+        }
+    }, [isAuth])
 
-    const onLogPanelChange = ({ password, login }) => {
-        setPassword(password);
-        setLogin(login);
-    }
 
     return (
         <div align="center" className="lpage">
-            <CLogPanel onChange={onLogPanelChange} />
-            <CButton onClick={auth}>Войти</CButton>
+            <CLogPanel onChange={ ({ password, login }) => {
+                setPassword(password);
+                setLogin(login);
+            }} />
+            <CButton onClick={() => loginA(login, password)}>Войти</CButton>
             <br />
-            <CButton onClick={toRegistration}>Регистрация</CButton>
-            {message && <><br /><span style={{ color: "white" }}>{message}</span></>}
+            <CButton onClick={() => navigate("/register")}>Регистрация</CButton>
+            {loginStatus == false && <><br /><span style={{ color: "white" }}>{"Ошибка авторизации"}</span></>}
         </div>
     )
 }
