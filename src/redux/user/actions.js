@@ -4,7 +4,7 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const REGISTRATION_USER = 'REGISTRATION_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 
-const createState = (type, payload) => {
+const createAction = (type, payload) => {
     return {
         type,
         payload
@@ -12,13 +12,13 @@ const createState = (type, payload) => {
 }
 
 export const loginUser = (login, password) => {
-    return dispatch => {
+    return (dispatch) => {
         AuthService.signIn(login, password)
         .then(() => {
-            dispatch(createState(LOGIN_USER, true));
+            dispatch(createAction(LOGIN_USER, true));
         })
         .catch(() => {
-            dispatch(createState(LOGIN_USER, false));
+            dispatch(createAction(LOGIN_USER, false));
         })
     }
 }
@@ -27,10 +27,10 @@ export const registrationUser = (login, password) => {
     return dispatch => {
         AuthService.signUp(login, password)
         .then(() => {
-            dispatch(createState(REGISTRATION_USER, true));
+            dispatch(createAction(REGISTRATION_USER, true));
         })
         .catch(() => {
-            dispatch(createState(REGISTRATION_USER, false));
+            dispatch(createAction(REGISTRATION_USER, false));
         })
     }
 }
@@ -38,6 +38,6 @@ export const registrationUser = (login, password) => {
 export const logoutUser = () => {
     return dispatch => {
         AuthService.logout();
-        dispatch(createState(LOGOUT_USER));
+        dispatch(createAction(LOGOUT_USER));
     }
 }
