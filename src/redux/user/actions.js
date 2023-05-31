@@ -11,33 +11,30 @@ const createAction = (type, payload) => {
     }
 }
 
-export const loginUser = (login, password) => {
-    return (dispatch) => {
-        AuthService.signIn(login, password)
-        .then(() => {
-            dispatch(createAction(LOGIN_USER, true));
-        })
-        .catch(() => {
-            dispatch(createAction(LOGIN_USER, false));
-        })
+export const loginUser = (login, password) => async (dispatch) => {
+    try {
+      await AuthService.signIn(login, password);
+      dispatch(createAction(LOGIN_USER, true));
+    } catch (error) {
+      dispatch(createAction(LOGIN_USER, false));
     }
-}
+  };
+  
 
-export const registrationUser = (login, password) => {
-    return dispatch => {
-        AuthService.signUp(login, password)
-        .then(() => {
-            dispatch(createAction(REGISTRATION_USER, true));
-        })
-        .catch(() => {
-            dispatch(createAction(REGISTRATION_USER, false));
-        })
+  export const registrationUser = (login, password) => async (dispatch) => {
+    try {
+      await AuthService.signUp(login, password);
+      dispatch(createAction(REGISTRATION_USER, true));
+    } catch (error) {
+      dispatch(createAction(REGISTRATION_USER, false));
     }
-}
+  };
 
-export const logoutUser = () => {
-    return dispatch => {
-        AuthService.logout();
-        dispatch(createAction(LOGOUT_USER));
+  export const logoutUser = (login, password) => async (dispatch) => {
+    try {
+       AuthService.logout(login, password);
+      dispatch(createAction(LOGOUT_USER, true));
+    } catch (error) {
+      dispatch(createAction(LOGOUT_USER, false));
     }
-}
+  };
